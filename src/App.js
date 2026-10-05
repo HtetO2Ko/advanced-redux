@@ -15,7 +15,7 @@ function App() {
   const notification = useSelector(state => state.ui.notification);
 
   useEffect(() => {
-    dispatch(fetchCartData);
+    dispatch(fetchCartData());
   }, [dispatch])
 
   useEffect(() => {
@@ -24,7 +24,9 @@ function App() {
       return;
     }
 
-    dispatch(sendCartData(cart))
+    if (cart.changed) {
+      dispatch(sendCartData(cart))
+    }
   }, [cart, dispatch])
 
   return (
